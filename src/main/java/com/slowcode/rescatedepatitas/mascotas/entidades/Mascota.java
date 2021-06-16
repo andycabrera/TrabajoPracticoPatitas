@@ -2,7 +2,11 @@ package com.slowcode.rescatedepatitas.mascotas.entidades;
 
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class Mascota {
     
     private String nombre;

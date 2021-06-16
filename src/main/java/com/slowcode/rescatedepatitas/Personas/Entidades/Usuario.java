@@ -37,6 +37,13 @@ public class Usuario implements Serializable {
     @Column(name="PERSONA")
     private Persona persona;
 
+    public Usuario(String nombreDeUsuario, String contrasenia, Boolean esAdmin, Persona persona) {
+		this.nombreDeUsuario = nombreDeUsuario;
+		this.contrasenia = validarContrasenia(contrasenia.trim());
+        this.esAdmin = esAdmin;
+        this.persona = persona;
+	}
+
     public String validarContrasenia(String unaContrasenia) {
 		RepositorioValidaciones.instance().validarContrasenia(unaContrasenia, this.nombreDeUsuario);
 		return unaContrasenia;

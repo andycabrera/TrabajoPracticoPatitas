@@ -1,4 +1,4 @@
-package com.slowcode.rescatedepatitas.Utils.Notificacion;
+package com.slowcode.rescatedepatitas.utils.notificacion;
 
 public class Whatsapp implements FormaNotificacion {
 
