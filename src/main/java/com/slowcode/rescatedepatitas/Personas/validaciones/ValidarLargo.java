@@ -1,6 +1,6 @@
-package Usuarios;
+package com.slowcode.rescatedepatitas.personas.validaciones;
 
-import Excepciones.EsContraseniaMuyCortaException;
+import com.slowcode.rescatedepatitas.excepciones.EsContraseniaMuyCortaException;
 
 public class ValidarLargo implements Validacion {
 

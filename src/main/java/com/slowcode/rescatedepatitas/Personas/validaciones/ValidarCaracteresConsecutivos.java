@@ -1,6 +1,6 @@
-package Usuarios;
+package com.slowcode.rescatedepatitas.personas.validaciones;
 
-import Excepciones.LaContraseniaContieneCaracteresConsecutivosException;
+import com.slowcode.rescatedepatitas.excepciones.LaContraseniaContieneCaracteresConsecutivosException;
 
 public class ValidarCaracteresConsecutivos implements Validacion {
 

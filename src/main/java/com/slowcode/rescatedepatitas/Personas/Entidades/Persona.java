@@ -1,10 +1,10 @@
-package com.slowcode.rescatedepatitas.Personas.Entidades;
+package com.slowcode.rescatedepatitas.personas.entidades;
 
 import java.sql.Date;
 import java.util.List;
 
-import com.slowcode.rescatedepatitas.Mascota.Entidades.Mascota;
-import com.slowcode.rescatedepatitas.Personasss.Roles.Rol;
+import com.slowcode.rescatedepatitas.mascotas.entidades.Mascota;
+import com.slowcode.rescatedepatitas.personas.roles.Rol;
 
 import lombok.Getter;
 import lombok.Setter;

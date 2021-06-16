@@ -1,6 +1,6 @@
-package Usuarios;
+package com.slowcode.rescatedepatitas.personas.validaciones;
 
-import Excepciones.EsContraseniaDebilException;
+import com.slowcode.rescatedepatitas.excepciones.EsContraseniaDebilException;
 
 public class ValidarDebilidad implements Validacion{
 

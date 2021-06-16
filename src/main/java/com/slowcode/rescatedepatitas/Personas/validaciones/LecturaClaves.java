@@ -1,11 +1,12 @@
-package Usuarios;
+package com.slowcode.rescatedepatitas.personas.validaciones;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import Excepciones.ArchivoNoEncontradoException;
+import com.slowcode.rescatedepatitas.excepciones.ArchivoNoEncontradoException;
+
 
 public class LecturaClaves {
 	

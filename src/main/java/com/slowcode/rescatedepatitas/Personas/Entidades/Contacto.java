@@ -1,8 +1,8 @@
-package com.slowcode.rescatedepatitas.Personas.Entidades;
+package com.slowcode.rescatedepatitas.personas.entidades;
 
 import java.util.List;
 
-import com.slowcode.rescatedepatitas.Utils.Notificacion.FormaNotificacion;
+import com.slowcode.rescatedepatitas.utils.Notificacion.FormaNotificacion;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,4 +1,4 @@
-package com.slowcode.rescatedepatitas.Personas.Entidades;
+package com.slowcode.rescatedepatitas.personas.entidades;
 
 import java.io.Serializable;
 
@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+
+import com.slowcode.rescatedepatitas.personas.validaciones.repositories.RepositorioValidaciones;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -36,7 +38,7 @@ public class Usuario implements Serializable {
     private Persona persona;
 
     public String validarContrasenia(String unaContrasenia) {
-		RepositorioValidaciones.instance().validarContrasenia(unaContrasenia, this.nombreUsuario);
+		RepositorioValidaciones.instance().validarContrasenia(unaContrasenia, this.nombreDeUsuario);
 		return unaContrasenia;
 	}
 

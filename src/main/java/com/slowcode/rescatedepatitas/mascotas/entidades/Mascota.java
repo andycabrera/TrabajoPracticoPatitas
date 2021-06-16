@@ -1,4 +1,4 @@
-package com.slowcode.rescatedepatitas.Mascota.Entidades;
+package com.slowcode.rescatedepatitas.mascotas.entidades;
 
 import java.util.List;
 

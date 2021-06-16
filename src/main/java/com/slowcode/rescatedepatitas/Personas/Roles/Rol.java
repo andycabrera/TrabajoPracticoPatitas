@@ -1,4 +1,4 @@
-package com.slowcode.rescatedepatitas.Persona.Roles;
+package com.slowcode.rescatedepatitas.personas.roles;
 
 public interface Rol {
     

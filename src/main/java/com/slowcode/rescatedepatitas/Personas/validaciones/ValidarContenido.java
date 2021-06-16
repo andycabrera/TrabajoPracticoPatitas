@@ -1,6 +1,6 @@
-package Usuarios;
+package com.slowcode.rescatedepatitas.personas.validaciones;
 
-import Excepciones.LaContraseniaNoPuedeContenerElNombreDeUsuarioException;
+import com.slowcode.rescatedepatitas.excepciones.LaContraseniaNoPuedeContenerElNombreDeUsuarioException;
 
 public class ValidarContenido implements Validacion{
 	String nombreUsuario;
