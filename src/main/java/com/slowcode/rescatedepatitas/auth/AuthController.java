@@ -2,7 +2,8 @@ package com.slowcode.rescatedepatitas.auth;
 
 import java.util.Optional;
 
-import com.slowcode.rescatedepatitas.personas.entidades.Persona;
+import com.slowcode.rescatedepatitas.auth.entidades.UsuarioRequest;
+import com.slowcode.rescatedepatitas.auth.entidades.UsuarioRequestLogin;
 import com.slowcode.rescatedepatitas.personas.entidades.Usuario;
 import com.slowcode.rescatedepatitas.personas.repositories.UsuarioRepository;
 import com.slowcode.rescatedepatitas.utils.Tools;
@@ -27,13 +28,10 @@ public class AuthController {
 
     @PostMapping("/registro")
     public ResponseEntity<Object> registratUsuario(
-            @RequestBody String nombreDeUsuario, 
-            @RequestBody String contrasenia,
-            @RequestBody Boolean esAdmin,
-            @RequestBody Persona persona    
+            @RequestBody UsuarioRequest usuarioRequest
         ){
         try {
-            Usuario usuario = new Usuario(nombreDeUsuario, contrasenia, esAdmin, persona);
+            Usuario usuario = new Usuario(usuarioRequest.getNombreDeUsuario(), usuarioRequest.getContrasenia(), usuarioRequest.getEsAdmin());
 			this.usuarioRepository.save(usuario);
             return ResponseEntity.ok(usuario);
         } catch (Exception e) {
@@ -43,12 +41,11 @@ public class AuthController {
 
     @PostMapping("/loggin")
     public ResponseEntity<Object> loggin(
-            @RequestBody String nombreDeUsuario, 
-            @RequestBody String contrasenia    
+            @RequestBody UsuarioRequestLogin usuarioRequest
         ){
         
-        Optional<Usuario> usuario = usuarioRepository.findByNombreDeUsuario(nombreDeUsuario);
-        if(usuario.isPresent() && (contrasenia.equals(usuario.get().getContrasenia()))){
+        Optional<Usuario> usuario = usuarioRepository.findByNombreDeUsuario(usuarioRequest.getNombreDeUsuario());
+        if(usuario.isPresent() && (usuarioRequest.getContrasenia().equals(usuario.get().getContrasenia()))){
             return ResponseEntity.ok(usuario);
         }else{
             return new Tools().error("Ingreso un Usuario/Contraseña incorrecto");
