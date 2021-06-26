@@ -7,19 +7,31 @@ import com.slowcode.rescatedepatitas.auth.entidades.UsuarioRequestLogin;
 import com.slowcode.rescatedepatitas.personas.entidades.Usuario;
 import com.slowcode.rescatedepatitas.personas.repositories.UsuarioRepository;
 import com.slowcode.rescatedepatitas.utils.Tools;
-
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.context.annotation.Bean;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+            registry.addMapping("/**").allowedMethods("GET", "POST","PUT", "DELETE");
+            }
+        };
+    }
     
     private UsuarioRepository usuarioRepository;
+    
 
     @Autowired
     public AuthController(UsuarioRepository usuarioRepository) {
@@ -51,4 +63,5 @@ public class AuthController {
             return new Tools().error("Ingreso un Usuario/Contraseña incorrecto");
         }       
     }
+
 }
