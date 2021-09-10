@@ -2,6 +2,7 @@ package com.slowcode.rescatedepatitas.personas.entidades;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,9 +33,12 @@ public class MedioComunicacion implements Serializable{
     @Column(name="MEDIO_PREFERIDO")
     private Boolean medioPreferido;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="CONTACTO_ID", nullable=false)
+    @Getter(AccessLevel.NONE)
     private Contacto contacto;
+
+    public MedioComunicacion(){}
 
     public MedioComunicacion (String tipoDeMedio, Boolean medioPreferido, Contacto contacto){
         this.tipoDeMedio = tipoDeMedio;

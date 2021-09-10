@@ -53,8 +53,6 @@ public class Persona implements Serializable {
     @OneToMany(mappedBy = "persona", cascade=CascadeType.ALL)
     private List<Mascota> mascota;
 
-    
-
     public Persona(){}
 
     public Persona(

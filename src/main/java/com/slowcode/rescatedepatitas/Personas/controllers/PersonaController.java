@@ -5,10 +5,12 @@ import java.util.Optional;
 import com.slowcode.rescatedepatitas.mascotas.entidades.Mascota;
 import com.slowcode.rescatedepatitas.mascotas.entidades.dto.MascotaPersonaRequest;
 import com.slowcode.rescatedepatitas.mascotas.entidades.dto.MascotaRequest;
+import com.slowcode.rescatedepatitas.mascotas.entidades.dto.MedioDeComunicacion;
 import com.slowcode.rescatedepatitas.mascotas.repositories.MascotaRepository;
 import com.slowcode.rescatedepatitas.mascotas.repositories.MediosRepository;
 import com.slowcode.rescatedepatitas.personas.entidades.Contacto;
 import com.slowcode.rescatedepatitas.personas.entidades.Documento;
+import com.slowcode.rescatedepatitas.personas.entidades.MedioComunicacion;
 import com.slowcode.rescatedepatitas.personas.entidades.Persona;
 import com.slowcode.rescatedepatitas.personas.repositories.PersonaRepository;
 import com.slowcode.rescatedepatitas.utils.Tools;
@@ -93,14 +95,17 @@ public class PersonaController {
                 persona);
 
 			this.mascotaRepository.save(mascota);
-            
-            // MedioComunicacion medio = new MedioComunicacion(
-            //     mascotaPersonaRequest.getTipoDeMedio(), 
-            //     mascotaPersonaRequest.getMedioPreferido(), 
-            //     contacto
-            // );
 
-            // this.mediosRepository.save(medio);
+            for(MedioDeComunicacion medio : mascotaPersonaRequest.getMedios()){
+                MedioComunicacion newMedio = new MedioComunicacion(
+                    medio.getTipoDeMedio(), 
+                    medio.getMedioPreferido(), 
+                    contacto
+                );
+
+                this.mediosRepository.save(newMedio);
+            }
+            
             return ResponseEntity.ok(persona);
         } catch (Exception e) {
             return new Tools().error(e.getMessage());

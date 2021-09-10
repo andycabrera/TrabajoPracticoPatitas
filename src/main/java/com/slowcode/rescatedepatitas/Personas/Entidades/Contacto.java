@@ -38,8 +38,8 @@ public class Contacto implements Serializable {
     @Column(name="EMAIL")
     private String email;
 
-    // @OneToMany(mappedBy="contacto")
-    // private List<MedioComunicacion> mediosDeComunicacion;
+    @OneToMany(mappedBy="contacto")
+    private List<MedioComunicacion> mediosDeComunicacion;
 
     public Contacto(){}
 

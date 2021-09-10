@@ -1,6 +1,7 @@
 package com.slowcode.rescatedepatitas.mascotas.entidades.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -28,7 +29,6 @@ public class MascotaPersonaRequest {
     private String telefono;
     private String email;
 
-    private String tipoDeMedio;
-    private Boolean MedioPreferido;
+    private List<MedioDeComunicacion> medios;
 
 }
