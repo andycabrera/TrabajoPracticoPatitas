@@ -1,6 +1,6 @@
 package com.slowcode.rescatedepatitas.utils.notificacion;
 
-public class Whatsapp implements FormaNotificacion {
+public class Whatsapp implements MedioComunicacionn {
 
     @Override
     public void notificar() {

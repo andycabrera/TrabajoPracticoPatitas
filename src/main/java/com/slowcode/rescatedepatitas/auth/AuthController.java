@@ -6,6 +6,7 @@ import com.slowcode.rescatedepatitas.auth.entidades.UsuarioRequest;
 import com.slowcode.rescatedepatitas.auth.entidades.UsuarioRequestLogin;
 import com.slowcode.rescatedepatitas.personas.entidades.Usuario;
 import com.slowcode.rescatedepatitas.personas.repositories.UsuarioRepository;
+import com.slowcode.rescatedepatitas.personas.roles.Rol;
 import com.slowcode.rescatedepatitas.utils.Tools;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -20,15 +21,6 @@ import org.springframework.context.annotation.Bean;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-            registry.addMapping("/**").allowedMethods("GET", "POST","PUT", "DELETE");
-            }
-        };
-    }
     
     private UsuarioRepository usuarioRepository;
     
@@ -43,7 +35,7 @@ public class AuthController {
             @RequestBody UsuarioRequest usuarioRequest
         ){
         try {
-            Usuario usuario = new Usuario(usuarioRequest.getNombreDeUsuario(), usuarioRequest.getContrasenia(), usuarioRequest.getEsAdmin());
+            Usuario usuario = new Usuario(usuarioRequest.getNombreDeUsuario(), usuarioRequest.getContrasenia(), new Rol(usuarioRequest.getRol()));
 			this.usuarioRepository.save(usuario);
             return ResponseEntity.ok(usuario);
         } catch (Exception e) {

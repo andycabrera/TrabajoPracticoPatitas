@@ -1,6 +1,6 @@
 package com.slowcode.rescatedepatitas.utils.notificacion;
 
-public interface FormaNotificacion {
+public interface MedioComunicacionn {
 
     public abstract void notificar();
 }
