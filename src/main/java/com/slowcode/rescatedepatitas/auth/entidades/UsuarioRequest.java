@@ -8,9 +8,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UsuarioRequest {
-    
+
     private String nombreDeUsuario;
     private String contrasenia;
     private String rol;
-    
+
 }
