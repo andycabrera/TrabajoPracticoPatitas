@@ -6,9 +6,11 @@ import java.util.Optional;
 
 import com.slowcode.rescatedepatitas.mascotas.entidades.Caracteristica;
 import com.slowcode.rescatedepatitas.mascotas.entidades.Mascota;
+import com.slowcode.rescatedepatitas.mascotas.entidades.dto.CaracteristicaDto;
 import com.slowcode.rescatedepatitas.mascotas.entidades.dto.MascotaPersonaRequest;
 import com.slowcode.rescatedepatitas.mascotas.entidades.dto.MascotaRequest;
 import com.slowcode.rescatedepatitas.mascotas.entidades.dto.MedioDeComunicacion;
+import com.slowcode.rescatedepatitas.mascotas.entidades.dto.PersonaRequest;
 import com.slowcode.rescatedepatitas.mascotas.repositories.CaracteristicaRepository;
 import com.slowcode.rescatedepatitas.mascotas.repositories.MascotaRepository;
 import com.slowcode.rescatedepatitas.mascotas.repositories.MediosRepository;
@@ -16,7 +18,9 @@ import com.slowcode.rescatedepatitas.personas.entidades.Contacto;
 import com.slowcode.rescatedepatitas.personas.entidades.Documento;
 import com.slowcode.rescatedepatitas.personas.entidades.MedioComunicacion;
 import com.slowcode.rescatedepatitas.personas.entidades.Persona;
+import com.slowcode.rescatedepatitas.personas.entidades.Usuario;
 import com.slowcode.rescatedepatitas.personas.repositories.PersonaRepository;
+import com.slowcode.rescatedepatitas.personas.repositories.UsuarioRepository;
 import com.slowcode.rescatedepatitas.utils.Tools;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +46,9 @@ public class PersonaController {
     private MediosRepository mediosRepository;
 
     @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
     private CaracteristicaRepository caracteristicaRepository;
 
     @GetMapping("/{id}")
@@ -62,6 +69,54 @@ public class PersonaController {
     }
 
     @PostMapping()
+    public ResponseEntity<Object> registrarPersona(
+            @RequestBody PersonaRequest personaRequest) {
+
+        try {
+
+            Optional<Usuario> usuario = this.usuarioRepository.findById(personaRequest.getUsuarioId());
+
+            if (usuario.isPresent()) {
+                Documento documento = new Documento(personaRequest.getNroDocumento(),
+                        personaRequest.getTipoDocumento());
+
+                Contacto contacto = new Contacto(
+                        personaRequest.getContactoNombreCompleto(),
+                        personaRequest.getTelefono(),
+                        personaRequest.getEmail());
+
+                Persona persona = new Persona(
+                        personaRequest.getNombreCompleto(),
+                        personaRequest.getDireccion(),
+                        personaRequest.getFechaNacimiento(),
+                        documento,
+                        contacto);
+
+                persona.setUsuario(usuario.get());
+
+                this.personaRepository.save(persona);
+
+                for (MedioDeComunicacion medio : personaRequest.getMedios()) {
+                    MedioComunicacion newMedio = new MedioComunicacion(
+                            medio.getTipoDeMedio(),
+                            medio.getMedioPreferido(),
+                            contacto);
+
+                    this.mediosRepository.save(newMedio);
+                }
+
+                return ResponseEntity.ok(persona);
+            } else {
+                return new Tools().error("UsuarioId no valido.");
+            }
+
+        } catch (Exception e) {
+            return new Tools().error(e.getMessage());
+        }
+
+    }
+
+    @PostMapping("/personamascota")
     public ResponseEntity<Object> registrarMascotayPersona(
             @RequestBody MascotaPersonaRequest mascotaPersonaRequest) {
         try {
@@ -118,7 +173,9 @@ public class PersonaController {
             List<Caracteristica> listaCaracteristicas = new ArrayList<>();
             Optional<Persona> persona = this.personaRepository.findById(mascotaRequest.getPersonaId());
 
-            for (Caracteristica caracteristica : mascotaRequest.getCaracteristicas()) {
+            for (CaracteristicaDto caracteristicaDto : mascotaRequest.getCaracteristicas()) {
+                Caracteristica caracteristica = new Caracteristica(caracteristicaDto.getNombre(),
+                        caracteristicaDto.getValor());
                 this.caracteristicaRepository.save(caracteristica);
                 listaCaracteristicas.add(caracteristica);
             }

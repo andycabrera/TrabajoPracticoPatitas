@@ -1,6 +1,5 @@
 package com.slowcode.rescatedepatitas.personas.roles;
 
-
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -17,17 +16,20 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "ROL")
-public class Rol implements Serializable{
-    
+public class Rol implements Serializable {
+
     @Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name= "ID_ROL", unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_ROL", unique = true, nullable = false)
     private Long id;
 
-    @Column(name="ROL_DESCRIPCION")
+    @Column(name = "ROL_DESCRIPCION")
     private String rolDescripcion;
 
-    public Rol (String rolDescripcion){
+    public Rol() {
+    }
+
+    public Rol(String rolDescripcion) {
         this.rolDescripcion = rolDescripcion;
     }
 }

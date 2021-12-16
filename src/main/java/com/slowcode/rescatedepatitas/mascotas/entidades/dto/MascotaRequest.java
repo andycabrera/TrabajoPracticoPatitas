@@ -2,8 +2,6 @@ package com.slowcode.rescatedepatitas.mascotas.entidades.dto;
 
 import java.util.List;
 
-import com.slowcode.rescatedepatitas.mascotas.entidades.Caracteristica;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,5 +18,5 @@ public class MascotaRequest {
     private String claseAnimal;
     private String foto;
     private Long personaId;
-    private List<Caracteristica> caracteristicas;
+    private List<CaracteristicaDto> caracteristicas;
 }
