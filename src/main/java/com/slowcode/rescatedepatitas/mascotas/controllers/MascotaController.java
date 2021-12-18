@@ -143,60 +143,47 @@ public class MascotaController {
 
     }
 
-    @GetMapping("/publicacion/{idPersona}")
-    public ResponseEntity<Object> getPublicaciones(@PathVariable("idPersona") Long idPersona) {
+    @GetMapping("/publicacion")
+    public ResponseEntity<Object> getPublicaciones() {
 
         try {
-            Optional<Persona> persona = this.personaRepository.findById(idPersona);
 
-            if (persona.isPresent()) {
 
-                List<Publicacion> lista = this.publicacionRepository.findByPersona(persona.get());
+                List<Publicacion> lista = this.publicacionRepository.findAll();
 
                 return ResponseEntity.ok(lista);
-            } else {
-                return new Tools().error("Persona no encontrada");
-            }
+           
         } catch (Exception e) {
             return new Tools().error(e.getMessage());
         }
 
     }
 
-    @GetMapping("/publicarAdopcion/{idPersona}")
-    public ResponseEntity<Object> getPublicarAdopcion(@PathVariable("idPersona") Long idPersona) {
+    @GetMapping("/publicarAdopcion")
+    public ResponseEntity<Object> getPublicarAdopcion() {
 
         try {
-            Optional<Persona> persona = this.personaRepository.findById(idPersona);
 
-            if (persona.isPresent()) {
 
-                List<Adopcion> lista = this.adopcionRepository.findByPersona(persona.get());
+                List<Adopcion> lista = this.adopcionRepository.findAll();
 
                 return ResponseEntity.ok(lista);
-            } else {
-                return new Tools().error("Persona no encontrada");
-            }
+          
         } catch (Exception e) {
             return new Tools().error(e.getMessage());
         }
 
     }
 
-    @GetMapping("/intencionAdopcion/{idPersona}")
-    public ResponseEntity<Object> getIntencionAdopcion(@PathVariable("idPersona") Long idPersona) {
+    @GetMapping("/intencionAdopcion")
+    public ResponseEntity<Object> getIntencionAdopcion() {
 
         try {
-            Optional<Persona> persona = this.personaRepository.findById(idPersona);
 
-            if (persona.isPresent()) {
+            List<IntencionAdopcion> lista = this.intencionAdopcionRepository.findAll();
 
-                List<IntencionAdopcion> lista = this.intencionAdopcionRepository.findByPersona(persona.get());
-
-                return ResponseEntity.ok(lista);
-            } else {
-                return new Tools().error("Persona no encontrada");
-            }
+            return ResponseEntity.ok(lista);
+  
         } catch (Exception e) {
             return new Tools().error(e.getMessage());
         }
