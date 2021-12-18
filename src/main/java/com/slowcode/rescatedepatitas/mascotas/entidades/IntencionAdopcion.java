@@ -33,10 +33,10 @@ public class IntencionAdopcion implements Serializable {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "PERSONA_ID", nullable = false)
-    @Getter(AccessLevel.NONE)
     private Persona persona;
+    
 
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "intencionAdopcion", cascade=CascadeType.ALL)
     private List<PreguntaRespuesta> listaPreguntaRespuesta;
 
     public IntencionAdopcion() {

@@ -86,19 +86,22 @@ public class MascotaController {
 
             if (persona.isPresent()) {
 
+
+                adopcion.setPersona(persona.get());
+                // adopcion.setListaPreguntaRespuesta(listPreguntas);
+                adopcion.setFoto(request.getFoto());
+
+                this.adopcionRepository.save(adopcion);
+
+
                 for (PreguntaRespuestaDto preguntaRespuesta : request.getListaPreguntas()) {
                     PreguntaRespuesta preguntaResp = new PreguntaRespuesta(preguntaRespuesta.getPregunta(),
                             preguntaRespuesta.getRespuesta());
 
+                            preguntaResp.setAdopcion(adopcion);
                     this.preguntaRespuestaRepository.save(preguntaResp);
                     listPreguntas.add(preguntaResp);
                 }
-
-                adopcion.setPersona(persona.get());
-                adopcion.setListaPreguntaRespuesta(listPreguntas);
-                adopcion.setFoto(request.getFoto());
-
-                this.adopcionRepository.save(adopcion);
 
                 return ResponseEntity.ok(adopcion);
             } else {
@@ -120,19 +123,22 @@ public class MascotaController {
 
             if (persona.isPresent()) {
 
+                
+
+                adopcion.setPersona(persona.get());
+                // adopcion.setListaPreguntaRespuesta(listPreguntas);
+
+                this.intencionAdopcionRepository.save(adopcion);
+
                 for (PreguntaRespuestaDto preguntaRespuesta : request.getListaPreguntas()) {
                     PreguntaRespuesta preguntaResp = new PreguntaRespuesta(preguntaRespuesta.getPregunta(),
                             preguntaRespuesta.getRespuesta());
 
+                    preguntaResp.setIntencionAdopcion(adopcion);
                     this.preguntaRespuestaRepository.save(preguntaResp);
                     listPreguntas.add(preguntaResp);
                 }
-
-                adopcion.setPersona(persona.get());
-                adopcion.setListaPreguntaRespuesta(listPreguntas);
-
-                this.intencionAdopcionRepository.save(adopcion);
-
+        
                 return ResponseEntity.ok(adopcion);
             } else {
                 return new Tools().error("Persona no encontrada.");

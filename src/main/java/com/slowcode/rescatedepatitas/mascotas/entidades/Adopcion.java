@@ -33,10 +33,9 @@ public class Adopcion implements Serializable {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "PERSONA_ID", nullable = false)
-    @Getter(AccessLevel.NONE)
     private Persona persona;
 
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "adopcion")
     private List<PreguntaRespuesta> listaPreguntaRespuesta;
 
     @Column(name = "FOTO")
